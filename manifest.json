@@ -1,0 +1,12 @@
+{
+  "name": "Ассистент илья",
+  "display": "standalone",
+  "start_url": "/",
+  "icons": [
+    {
+      "src": "icon.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
