@@ -5,6 +5,7 @@ async function parseSite() {
     // Список разных прокси-сервисов
     const proxyList = [
         //url => `https://api.allorigins.win/get?url=${encodeURIComponent(url)}`,
+        url => 'https://cors-anywhere.herokuapp.com/' + url,
         url => `https://corsproxy.io/?${encodeURIComponent(url)}`,
         url => `https://thingproxy.freeboard.io/fetch/${url}`
     ];
