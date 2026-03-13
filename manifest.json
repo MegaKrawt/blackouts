@@ -1,7 +1,9 @@
 {
   "name": "Ассистент илья",
+  "short_name": "Ассистент илья",
   "display": "standalone",
-  "start_url": "/",
+  "start_url": "/blackouts/",
+  "scope": "/blackouts/",
   "icons": [
     {
       "src": "icon.png",
