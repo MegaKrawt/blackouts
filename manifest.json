@@ -2,8 +2,8 @@
   "name": "Ассистент илья",
   "short_name": "Ассистент илья",
   "display": "standalone",
-  "start_url": "/blackouts/",
-  "scope": "/blackouts/",
+  "start_url": "https://megakrawt.github.io/blackouts/",
+  "scope": "https://megakrawt.github.io/blackouts/",
   "icons": [
     {
       "src": "icon.png",
