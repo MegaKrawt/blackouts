@@ -5,6 +5,7 @@ async function parseSite() {
     // Список разных прокси-сервисов
     const proxyList = [
         //url => `https://api.allorigins.win/get?url=${encodeURIComponent(url)}`,
+        url => 'https://billowing-fog-9e1b.iluhavmajnkrafte.workers.dev/?url=' + encodeURIComponent(url),
         url => 'https://cors-anywhere.herokuapp.com/' + url,
         url => `https://corsproxy.io/?${encodeURIComponent(url)}`,
         url => `https://thingproxy.freeboard.io/fetch/${url}`
@@ -98,6 +99,10 @@ function renderSchedule(html) {
 
     tableHtml += `</table>`;
     output.innerHTML = tableHtml;
+
+    let LightStatus = getLightStatus(allIntervals)
+    console.log(LightStatus);
+    document.getElementById('LightStatus').innerHTML = LightStatus
 }
 
 // Вспомогательная функция для оформления (вынеси её за пределы основной)
@@ -113,3 +118,30 @@ function formatStatusToBool(color) {
 }
 
 parseSite();
+
+
+
+
+function getLightStatus(data) {
+    const now = new Date();
+    let currentHour = now.getHours() + (now.getMinutes() >= 30 ? 0.5 : 0);
+
+    // 1. Определяем, есть ли свет прямо сейчас
+    const currentSlot = data.find(slot => slot.hour === currentHour);
+    const isLightOn = currentSlot ? currentSlot.bool : true;
+
+    // 2. Ищем следующее изменение статуса
+    // Нам нужен первый слот, который идет ПОСЛЕ текущего и где bool отличается от текущего
+    const nextChange = data.find(slot => slot.hour > currentHour && slot.bool !== isLightOn);
+
+    if (isLightOn) {
+        return nextChange 
+            ? `Свет есть. Отключат в ${nextChange.time.split(' - ')[0]}` 
+            : "Свет есть, отключений до конца дня не планируется.";
+    } else {
+        return nextChange 
+            ? `Света нет. Включат в ${nextChange.time.split(' - ')[0]}` 
+            : "Света нет, включение будет уже завтра.";
+    }
+}
+
